@@ -1,6 +1,11 @@
-cmake_minimum_required(VERSION 3.31)
-project(RayPale C)
+cmake_minimum_required(VERSION 3.10)
+project(my_game C)
 
-set(CMAKE_C_STANDARD 23)
+set(CMAKE_C_STANDARD 11)
 
-add_executable(RayPale main.c)
+include_directories(include)
+link_directories(lib)
+
+add_executable(my_game main.c)
+
+target_link_libraries(my_game raylib opengl32 gdi32 winmm)

@@ -1,15 +1,18 @@
 #include "include/raylib.h"
 
 int main(void) {
-    const int screenWidth = 800;
-    const int screenHeight = 450;
-    const int rectSize = 40;
+    const int screenWidth = 900;
+    const int screenHeight = 600;
+    const int rectSize = 96;
     const int fps = 60;
     const float speed = 500.0f;
     const float dt = 1.0f / (float) fps;
 
+    InitWindow(screenWidth, screenHeight, "Driving in My Car");
 
-    InitWindow(screenWidth, screenHeight, "Bouncing Rectangle");
+    Image image = LoadImage("../imgs/DUI.png");
+    Texture2D texture = LoadTextureFromImage(image);
+    UnloadImage(image);
 
     SetTargetFPS(fps);
 
@@ -25,10 +28,19 @@ int main(void) {
 
         BeginDrawing();
         ClearBackground(BLACK);
-        DrawRectangle((int) position.x, (int) position.y, rectSize, rectSize, RED);
+        DrawTexturePro(
+            texture,
+            (Rectangle){0, 0, (float)texture.width, (float)texture.height},
+            (Rectangle){position.x, position.y, rectSize, rectSize},
+            (Vector2){0, 0},
+            0.0f,
+            WHITE
+        );
         EndDrawing();
     }
 
+    UnloadTexture(texture);
     CloseWindow();
+
     return 0;
 }
